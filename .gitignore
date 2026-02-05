@@ -39,3 +39,25 @@
 
 # debug information files
 *.dwo
+
+# Visual Studio спеціальні папки
+.vs/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+
+# Тимчасові файли Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+# Файли збірки MSBuild
+msbuild.log
+*.tlog
+*.lastbuildstate
