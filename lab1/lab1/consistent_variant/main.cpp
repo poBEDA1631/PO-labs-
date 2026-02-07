@@ -2,6 +2,7 @@
 #include <vector>
 #include <ctime>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -15,26 +16,34 @@ int main() {
 		for (int j = 0; j < N; j++)
 		{
 			quadratic_matrix[i][j] = rand() % 10 + 1;
-			cout << quadratic_matrix[i][j] << "\t";
 		}
-		cout << endl;
 	}
+
+	volatile long long warmUpSum = 0;
+	for (int i = 0; i < N; i++) {
+		warmUpSum += quadratic_matrix[i][i];
+	}
+
+	auto start = chrono::high_resolution_clock::now();
 
 	for (int i = 0; i < N; i++) {
 		int maxInRow = *max_element(quadratic_matrix[i].begin(), quadratic_matrix[i].end());
 		quadratic_matrix[i][i] = maxInRow;
 	}
 
-	cout << "\nMatrix after mod: " << endl;
+	auto end = chrono::high_resolution_clock::now();
+
+	chrono::duration<double, milli> elapsed = end - start;
+
+	long long diagonalSum = 0;
 	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			if (i == j) {
-				cout << "[" << quadratic_matrix[i][j] << "]\t";
-			}
-			else {
-				cout << quadratic_matrix[i][j] << "\t";
-			}
-		}
-		cout << endl;
+		diagonalSum += quadratic_matrix[i][i];
 	}
+
+	cout << "Dimension of matrix: " << N << " x " << N << endl;
+	cout << "Warm-up sum: " << warmUpSum << " (Cache is ready!)" << endl;
+	cout << "Time:" << elapsed.count() << "ms" << endl;
+	cout << "Sum of main diagonal: " << diagonalSum << endl;
+
+	return 0;
 }
