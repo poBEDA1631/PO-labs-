@@ -8,10 +8,10 @@ using namespace std;
 
 int xor_sum_calc(const vector<int>& data, int N){
 	int xor_sum = 0;
-	for (int i = 0; i < N; i++) {
-		if (data[i] % 2 != 0)
+	for (int x : data) {
+		if (x % 2 != 0)
 		{
-			xor_sum = xor_sum ^ data[i];
+			xor_sum = xor_sum ^ x;
 		}
 	}
 	return xor_sum;
@@ -28,11 +28,10 @@ int main() {
 			data[i] = rand() % 8;
 	}
 
-	cout << "--- Matrix after creation ---" << endl;
-	for (int i = 0; i < N; i++) {
+	cout << "--- data (first 10 elements) ---" << endl;
+	for (int i = 0; i < (N > 10 ? 10 : N); i++) {
 		cout << setw(4) << data[i];
 	}
-	cout << endl;
 	cout << "-----------------------------" << endl;
 
 	volatile long long warmUpSum = 0;
