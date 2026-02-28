@@ -5,10 +5,11 @@
 #include <chrono>
 #include <iomanip>
 #include <thread>
+#include <atomic>
 
 
 using namespace std;
-volatile int result = 0;
+static atomic<int> result(0);
 
 
 void xor_sum_calc(int start, int end, const vector<int>& data) {
@@ -22,9 +23,9 @@ void xor_sum_calc(int start, int end, const vector<int>& data) {
 
 	int old_val, new_val;
 	do {
-		old_val = result;
+		old_val = result.load();
 		new_val = old_val ^ local_sum;
-	} while (__sync_val_compare_and_swap(&result, old_val, new_val) != old_val);
+	} while (!result.compare_exchange_weak(old_val, new_val));
 }
 
 int main() {
