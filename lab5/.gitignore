@@ -1,0 +1,29 @@
+# IDEs
+.vs/
+.vscode/
+*.swp
+*.swo
+
+# Build directories
+out/
+build/
+bin/
+obj/
+
+# Compiled Binaries
+lab5_server
+*.exe
+*.o
+*.obj
+
+# Python / Locust
+.venv/
+__pycache__/
+*.log
+locust_report.html
+
+# CMake artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
